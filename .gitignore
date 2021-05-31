@@ -1,0 +1,7 @@
+# Excluded files
+.env
+*-lock.json
+*.code-workspace
+
+# Excluded folders
+node_modules
