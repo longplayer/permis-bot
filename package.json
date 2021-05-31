@@ -2,10 +2,11 @@
   "name": "devlp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "permis": "node permis"
+    "permis": "node permis",
+    "start": "electron ."
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,10 @@
     "dotenv": "^9.0.2",
     "nodemailer": "^6.6.0",
     "puppeteer": "^9.1.1"
+  },
+  "devDependencies": {
+    "electron": "^13.0.1",
+    "puppeteer-core": "^10.0.0",
+    "puppeteer-in-electron": "^3.0.3"
   }
 }
