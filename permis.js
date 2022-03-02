@@ -10,13 +10,29 @@ const url = process.env.APP_URL;
     await page.goto(url, { waitUntil: "networkidle2" });
 
     const navigationPromise = page.waitForNavigation();
+    const fillTheForm = async (page, validate = true) => {
+      // form's fields
+      await page.type('input[name="Customer.FirstName"]', process.env.USER_FIRST_NAME);
+      await page.type('input[name="Customer.LastName"]', process.env.USER_LAST_NAME);
+      await page.type('input[name="Customer.Phone"]', process.env.USER_PHONE);
+      await page.type('input[name="Customer.Email"]', process.env.USER_EMAIL);
+      await page.type('input[name="Customer.ConfirmEmail"]', process.env.USER_EMAIL);
+      await page.type('input[name="Customer.Street"]', process.env.USER_STREET);
+      await page.type('input[name="Customer.StreetNumber"]', process.env.USER_STREET_NUMBER);
+      await page.type('input[name="Customer.PostalCode"]', process.env.USER_ZIPCODE);
+      await page.type('input[name="Customer.City"]', process.env.USER_CITY);
+      // form's checkbox check
+      await page.click('input#defaultCheck1');
+      // submit form click: Confirm appointement
+      if(validate) await page.click('input[type="submit"]');
+    }
 
     await page.setViewport({
         width: 1200,
         height: 900,
     });
 
-    // open modal window
+    // 1. open modal window
     await page.click(".container .col > button");
 
     // enter validity date
@@ -26,45 +42,30 @@ const url = process.env.APP_URL;
     // checkbox click
     await page.click('input#defaultCheck1');
 
-    // confirm button
+    // // confirm button
     await page.click('input#btnConfirmID');
 
-    // select 'AM'
+    // // select Test day and hour
     await page.waitForSelector('form:nth-child(3) input[type="submit"]', { visible: true });
-    await page.click('form:nth-child(3) input[type="submit"]');
 
-    // Let user choose the day manually
+    // // Let user choose the day manually
     navigationPromise;
 
     // fill the form
     await page.waitForSelector('input[name="Customer.FirstName"]', { visible: true });
-    await page.type('input[name="Customer.FirstName"]', process.env.USER_FIRST_NAME);
-    await page.type('input[name="Customer.LastName"]', process.env.USER_LAST_NAME);
-    await page.type('input[name="Customer.Phone"]', process.env.USER_PHONE);
-    await page.type('input[name="Customer.Email"]', process.env.USER_EMAIL);
-    await page.type('input[name="Customer.ConfirmEmail"]', process.env.USER_EMAIL);
-    await page.type('input[name="Customer.Street"]', process.env.USER_STREET);
-    await page.type('input[name="Customer.StreetNumber"]', process.env.USER_STREET_NUMBER);
-    await page.type('input[name="Customer.PostalCode"]', process.env.USER_ZIPCODE);
-    await page.type('input[name="Customer.City"]', process.env.USER_CITY);
-
-    // checkbox click
-    await page.click('input#defaultCheck1');
-
-    // sublit click
-    await page.click('input[type="submit"]');
+    fillTheForm(page, false)
 
     // check for security alert
     await page.waitForSelector('.alert.alert-danger', { visible: true });
 
-    // checkbox click
+    // // checkbox click
     await page.click('input#defaultCheck1');
 
-    // checkbox click
+    // // checkbox click
     await page.click('input[type="submit"]');
 
     await page.screenshot({
       path: "confirmation.png"
     });
-
 })();
+
