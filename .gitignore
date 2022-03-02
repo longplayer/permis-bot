@@ -1,5 +1,5 @@
 # Excluded files
-.env
+.env*local
 *-lock.json
 *.code-workspace
 

@@ -1,3 +1,7 @@
+# permis-bot
+
+Simple Puppeteer script to help to book a test session for the "Permis de Conduire" in Belgium.
+
 ## Documentation
 - [Doc](https://developers.google.com/web/tools/puppeteer)
 - [Puppeteer Google Examples](https://developers.google.com/web/tools/puppeteer/examples)
@@ -12,9 +16,9 @@
 
 ```shell
 do shell script "echo $PATH"
-do shell script "cd /Users/Amigos/devlp/puppet && /usr/local/bin/node permis"
+do shell script "cd /Users/xxx/puppet && /usr/local/bin/node permis"
 
 tell application "Terminal"
-	do script "cd /Users/Amigos/devlp/puppet && sudo /usr/local/bin/npm run permis" in window 1
+	do script "cd /Users/xxx/puppet && sudo /usr/local/bin/npm run permis" in window 1
 end tell
 ```
